@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace Event.Dataa.TableModels
+namespace Event.Data.TableModels
 {
     public class ThingToDo
     {
