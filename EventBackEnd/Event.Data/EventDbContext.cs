@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Event.Dataa.TableModels;
+using Event.Data.TableModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
