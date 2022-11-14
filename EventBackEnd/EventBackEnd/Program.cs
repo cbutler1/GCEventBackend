@@ -1,4 +1,4 @@
-using Event.Dataa;
+using Event.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -15,61 +15,61 @@ namespace Event.Services.Services
 
     public class ThingToDoService : IThingToDoService
     {
-        private readonly SchoolDbContext _context;
+        private readonly EventDbContext _context;
         
-        public CourseService(SchoolDbContext context)
+        public ThingToDoService(EventDbContext context)
         {
             _context = context;
         }
         
-        public ThingToDo CreateCourse(string title, string teacher)
+        public ThingToDo CreateThingToDo(string eventName, double price, string location, DateTime time)
         {
-            ThingToDo course = new ThingToDo() { Title = title, Teacher = teacher };
+            ThingToDo course = new ThingToDo() { EventName = eventName, Price = price, Location = location, Time = time };
 
-            _context.Courses.Add(course);
+            _context.ThingToDos.Add(course);
             _context.SaveChanges();
 
             return course;
         }
 
-        public ThingToDo? GetCourseById(int id)
+        public ThingToDo? GetThingToDoById(int id)
         {
-            return _context.Courses.SingleOrDefault(c => c.ID == id);
+            return _context.ThingToDos.SingleOrDefault(c => c.Id == id);
         }
 
-        public ICollection<ThingToDo> GetCourses()
+        public ICollection<ThingToDo> GetThingToDos()
         {
-            return _context.Courses.Include("Enrollments").ToList(); //example of eager loading
+            return _context.ThingToDos.Include("Enrollments").ToList(); //example of eager loading
         }
 
-        CourseStudentList ICourseService.GetStudentsForCourseId(int id)
-        {
-            //Course course = _context.Courses.Single(c => c.ID == id);
-            //ICollection<Student> students = _context.Enrollments
-            //    .Where(e => e.CourseID == id)
-            //    .Select(e => e.Student)
-            //    .ToList();
+        //CourseThingToDoList IThingToDoService.GetStudentsForCourseId(int id)
+        //{
+        //    //Course course = _context.Courses.Single(c => c.ID == id);
+        //    //ICollection<Student> students = _context.Enrollments
+        //    //    .Where(e => e.CourseID == id)
+        //    //    .Select(e => e.Student)
+        //    //    .ToList();
 
-            //var csl = new CourseStudentList() 
-            //{ 
-            //    CourseID = id, 
-            //    CourseTitle = course.Title, 
-            //    CourseTeacher = course.Teacher, 
-            //    Students = students 
-            //};
+        //    //var csl = new CourseStudentList() 
+        //    //{ 
+        //    //    CourseID = id, 
+        //    //    CourseTitle = course.Title, 
+        //    //    CourseTeacher = course.Teacher, 
+        //    //    Students = students 
+        //    //};
 
-            //return csl;
+        //    //return csl;
 
-            return _context.Courses.Where(c => c.ID == id)
-                .Select(c => new CourseStudentList()
-                {
-                    CourseID = c.ID,
-                    CourseTitle = c.Title,
-                    CourseTeacher = c.Teacher,
-                    Students = c.Enrollments.Select(e => e.Student).ToList()
-                }).FirstOrDefault();
+        //    return _context.Courses.Where(c => c.ID == id)
+        //        .Select(c => new CourseStudentList()
+        //        {
+        //            CourseID = c.ID,
+        //            CourseTitle = c.Title,
+        //            CourseTeacher = c.Teacher,
+        //            Students = c.Enrollments.Select(e => e.Student).ToList()
+        //        }).FirstOrDefault();
 
-        }
+        //}
 
     }
 }

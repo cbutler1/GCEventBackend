@@ -13,7 +13,6 @@ namespace Event.Data
 
 
         public EventDbContext(DbContextOptions<EventDbContext> options) : base(options) { }
-
         public DbSet<ThingToDo> ThingToDos { get; set; }
         public DbSet<Participation> Participations { get; set; }
         public DbSet<User> Users { get; set; }
@@ -26,9 +25,9 @@ namespace Event.Data
                 .HasForeignKey(e => e.UserId);
 
             modelBuilder.Entity<Participation>()
-                .HasOne(e => e.Event)
+                .HasOne(e => e.ThingToDo)
                 .WithMany(c => c.Participations)
-                .HasForeignKey(e => e.EventId);
+                .HasForeignKey(e => e.ThingToDoId);
         }
 
     }
