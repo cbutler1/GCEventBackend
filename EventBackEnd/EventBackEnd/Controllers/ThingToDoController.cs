@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using School.Services.Services;
+using Event.Services.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace School.Api.Controllers
+namespace Event.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CoursesController : ControllerBase
+    public class ThingToDoController : ControllerBase
     {
-        private readonly ICourseService _service;
+        private readonly IThingToDoService _service;
 
-        public CoursesController(ICourseService service)
+        public ThingToDoController(IThingToDoService service)
         {
             _service = service;
         }
@@ -21,7 +21,7 @@ namespace School.Api.Controllers
         [HttpGet]
         public ActionResult Get()
         {
-            var courses = _service.GetCourses();
+            var courses = _service.GetThingToDos();
             return Ok(courses);
         }
 
@@ -29,25 +29,25 @@ namespace School.Api.Controllers
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
-            var course = _service.GetCourseById(id);
+            var course = _service.GetThingToDoById(id);
             if(course == null) return NotFound("There is no course with an ID of " + id);
             return Ok(course);
         }
 
         // GetStudentsForCourseId
-        [HttpGet("studentlist/{id}")]
-        public ActionResult GetStudentsList(int id)
-        {
-            var csl = _service.GetStudentsForCourseId(id);
-            if(csl == null) return NotFound("There is no course with an ID of " + id);
-            return Ok(csl);
-        }
+        //[HttpGet("studentlist/{id}")]
+        //public ActionResult GetStudentsList(int id)
+        //{
+        //    var csl = _service.GetUsersForThingToDoId(id);
+        //    if(csl == null) return NotFound("There is no course with an ID of " + id);
+        //    return Ok(csl);
+        //}
 
         // POST api/<CoursesController>
         [HttpPost]
-        public ActionResult Post(string title, string teacher)
+        public ActionResult Post(string eventName, double price, string location, DateTime time)
         {
-            return Ok(_service.CreateCourse(title, teacher));
+            return Ok(_service.CreateThingToDo(eventName, price, location, time));
         }
     }
 }
