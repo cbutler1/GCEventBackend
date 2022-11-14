@@ -39,7 +39,7 @@ namespace Event.Services.Services
 
         public ICollection<ThingToDo> GetThingToDos()
         {
-            return _context.ThingToDos.Include("Enrollments").ToList(); //example of eager loading
+            return _context.ThingToDos.ToList(); //example of eager loading
         }
 
         //CourseThingToDoList IThingToDoService.GetStudentsForCourseId(int id)
