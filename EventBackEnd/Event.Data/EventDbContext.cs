@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Event.Dataa
+namespace Event.Data
 {
     public class EventDbContext : DbContext
     {
