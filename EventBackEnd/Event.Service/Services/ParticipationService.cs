@@ -11,7 +11,7 @@ namespace Event.Services.Services
         Participation? GetParticipationById(int id);
         ICollection<Participation> GetParticipationsByUserId(int id);
         Participation DeleteParticipation(int id);
-        //ICollection<string> GetUsers();
+        int GetNumberOfAttendees(int eventId);
     }
 
 
@@ -65,11 +65,11 @@ namespace Event.Services.Services
             return enrollment;
         }
 
-        //ICollection<string> IParticipationService.GetUsers()
-        //{
-        //    return _context.ThingToDos.Select(c => c.User).Distinct().ToList();
-        //}
-       
+        int IParticipationService.GetNumberOfAttendees(int eventId)
+        {
+            return _context.Participations.Where(x => x.Id == eventId).Count();
+        }
+
     }
 }
 
