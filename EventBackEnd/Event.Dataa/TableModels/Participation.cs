@@ -15,7 +15,7 @@ namespace Event.Data.TableModels
 
 
         [ForeignKey(nameof(ThingToDo))]
-        public int EventId { get; set; }
-        public ThingToDo Event { get; set; }
+        public int ThingToDoId { get; set; }
+        public ThingToDo ThingToDo { get; set; }
     }
 }
