@@ -45,9 +45,19 @@ namespace Event.Api.Controllers
 
         // POST api/<ParticipationController>
         [HttpPost]
-        public ActionResult Post(int thingToDoId, int participationId)
+        public ActionResult Post(int thingToDoId, int userId)
         {
-            return Ok(_service.CreateParticipation(thingToDoId, participationId));
+            //find all participations for a user
+            var participations = _service.GetParticipationsByUserId(userId);
+            //check if the user is already participating in the thingToDo
+            foreach(var participation in participations)
+            {
+                if(participation.Id == thingToDoId)
+                {
+                    return BadRequest("User is already participating in this thingToDo");
+                }
+            }        
+            return Ok(_service.CreateParticipation(thingToDoId, userId));
         }
 
         // delete participation
