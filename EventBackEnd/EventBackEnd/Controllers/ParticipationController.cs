@@ -45,9 +45,19 @@ namespace Event.Api.Controllers
 
         // POST api/<ParticipationController>
         [HttpPost]
-        public ActionResult Post(int thingToDoId, int participationId)
+        public ActionResult Post(int thingToDoId, int userId)
         {
-            return Ok(_service.CreateParticipation(thingToDoId, participationId));
+            //find all participations for a user
+            var participations = _service.GetParticipationsByUserId(userId);
+            //check if the user is already participating in the thingToDo
+            foreach(var participation in participations)
+            {
+                if(participation.Id == thingToDoId)
+                {
+                    return BadRequest("User is already participating in this thingToDo");
+                }
+            }        
+            return Ok(_service.CreateParticipation(thingToDoId, userId));
         }
 
         // delete participation
@@ -56,6 +66,17 @@ namespace Event.Api.Controllers
         {
             var enrollment = _service.DeleteParticipation(id);
             if (enrollment == null) return NotFound("There is no participation with an ID of " + id);
+            return Ok(enrollment);
+        }
+
+        // delete participation where userid and thingToDoId match
+        [HttpDelete("user/{userId}/thingToDo/{thingToDoId}")]
+        public ActionResult Delete(int userId, int thingToDoId)
+        {
+            var enrollment = _service.DeleteParticipationUserIdThingToDoId(userId, thingToDoId);
+            Console.WriteLine(userId); 
+            Console.WriteLine(thingToDoId);
+            if(enrollment == null) return NotFound("There is no participation with an userID of " + userId + " and thingToDoId of " + thingToDoId);
             return Ok(enrollment);
         }
 
