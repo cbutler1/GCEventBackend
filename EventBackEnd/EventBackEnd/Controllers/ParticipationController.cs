@@ -17,7 +17,7 @@ namespace Event.Api.Controllers
         }
 
 
-        // GET: api/<EnrollmentsController>
+        // GET: api/<ParticipationController>
         [HttpGet]
         public ActionResult Get()
         {
@@ -25,7 +25,7 @@ namespace Event.Api.Controllers
             return Ok(participation);
         }
 
-        // GET api/<EnrollmentsController>/5
+        // GET api/<ParticipationController>/5
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
@@ -34,8 +34,8 @@ namespace Event.Api.Controllers
             return Ok(participation);
         }
 
-        // GET api/Enrollments/student/5
-        [HttpGet("{userId}")]
+        // GET api/participation/user/5
+        [HttpGet("user/{userId}")]
         public ActionResult GetByUser(int userId)
         {
             var participation = _service.GetParticipationsByUserId(userId);
@@ -59,7 +59,7 @@ namespace Event.Api.Controllers
             return Ok(enrollment);
         }
 
-        // get all teachers
+        // get number of attendees
         [HttpGet("attendees")]
         public ActionResult GetNumberOfAttendees(int eventId)
         {

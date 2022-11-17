@@ -9,7 +9,7 @@ namespace Event.Services.Services
         Participation CreateParticipation(int user, int thingToDo);
         ICollection<Participation> GetParticipation();
         Participation? GetParticipationById(int id);
-        ICollection<Participation> GetParticipationsByUserId(int id);
+        ICollection<ThingToDo> GetParticipationsByUserId(int id);
         Participation DeleteParticipation(int id);
         int GetNumberOfAttendees(int eventId);
     }
@@ -48,11 +48,11 @@ namespace Event.Services.Services
             return _context.Participations.SingleOrDefault(e => e.Id == id);
         }
 
-        public ICollection<Participation> GetParticipationsByUserId(int id)
+        public ICollection<ThingToDo> GetParticipationsByUserId(int id)
         {
-            
-            var e = _context.Participations.Include(e => e.ThingToDo)
-                .Where(e => e.UserId == id)
+            var e = _context.Participations.Include(x => x.ThingToDo)
+                .Where(z => z.UserId == id)
+                .Select(t => t.ThingToDo)
                 .ToList();
             return e;
         }
