@@ -27,11 +27,11 @@ namespace Event.Services.Services
 
         public User CreateUser(string name)
         {
-            var user = new User
+            User user = new User
             {
                 Name = name
             };
-
+            
             _context.Users.Add(user);
             _context.SaveChanges();
 
