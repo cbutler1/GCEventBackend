@@ -48,14 +48,14 @@ namespace Event.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    EventId = table.Column<int>(type: "int", nullable: false)
+                    ThingToDoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Participations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Participations_ThingToDos_EventId",
-                        column: x => x.EventId,
+                        name: "FK_Participations_ThingToDos_ThingToDoId",
+                        column: x => x.ThingToDoId,
                         principalTable: "ThingToDos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -68,9 +68,9 @@ namespace Event.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Participations_EventId",
+                name: "IX_Participations_ThingToDoId",
                 table: "Participations",
-                column: "EventId");
+                column: "ThingToDoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Participations_UserId",

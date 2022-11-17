@@ -34,36 +34,14 @@ namespace Event.Api.Controllers
             return Ok(user);
         }
 
-        // POST api/<StudentsController>
+        // POST api/<UsersController>
         [HttpPost]
         public ActionResult Post(string name)
         {
             return Ok(_service.CreateUser(name));
         }
 
-        // post random student using http client
-        //[HttpPost("random")]
-        //public async Task<ActionResult> Post()
-        //{
-        //    var user = await _service.CreateRandomStudent();
-        //    if(user == null)
-        //    {
-        //        return StatusCode(500, "Something went wrong");
-        //    }
-        //    return Ok(user);
-        //}
-
-
-        // update student name
-        //[HttpPut("{id}")]
-        //public ActionResult Put(int id, string name)
-        //{
-        //    var user = _service.UpdateUserName(id, name);
-        //    if(user == null) return NotFound("There is no student with an id of " + id);
-        //    return Ok(user);
-        //}
-
-        //delete student
+        // Delete User
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
