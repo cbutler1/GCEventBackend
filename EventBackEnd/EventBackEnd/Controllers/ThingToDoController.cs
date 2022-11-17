@@ -34,19 +34,11 @@ namespace Event.Api.Controllers
             return Ok(course);
         }
 
-        // GetStudentsForCourseId
-        //[HttpGet("studentlist/{id}")]
-        //public ActionResult GetStudentsList(int id)
-        //{
-        //    var csl = _service.GetUsersForThingToDoId(id);
-        //    if(csl == null) return NotFound("There is no course with an ID of " + id);
-        //    return Ok(csl);
-        //}
-
         // POST api/<CoursesController>
         [HttpPost("name/{eventName}/price/{price}/location/{location}/date/{time}")]
         public ActionResult Post(string eventName, double price, string location, DateTime time)
         {
+            Console.WriteLine("post");
             return Ok(_service.CreateThingToDo(eventName, price, location, time));
         }
     }

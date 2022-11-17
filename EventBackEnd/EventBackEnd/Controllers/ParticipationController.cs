@@ -47,9 +47,7 @@ namespace Event.Api.Controllers
         [HttpPost]
         public ActionResult Post(int thingToDoId, int userId)
         {
-            //find all participations for a user
             var participations = _service.GetParticipationsByUserId(userId);
-            //check if the user is already participating in the thingToDo
             foreach(var participation in participations)
             {
                 if(participation.Id == thingToDoId)

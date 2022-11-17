@@ -49,5 +49,14 @@ namespace Event.Api.Controllers
             if(user == false) return NotFound("There is no user with an id of " + id);
             return Ok("User with id " + id + " was deleted");
         }
+
+        //update user
+        [HttpPut("{id}/{name}")]
+        public ActionResult Put(int id, string name)
+        {
+            var user = _service.GetUserById(id);
+            if(user == null) return NotFound("There is no user with an id of " + id);
+            return Ok(_service.UpdateUser(user, name));
+        }
     }
 }
