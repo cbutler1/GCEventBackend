@@ -35,7 +35,7 @@ namespace Event.Api.Controllers
         }
 
         // POST api/<UsersController>
-        [HttpPost]
+        [HttpPost("{name}")]
         public ActionResult Post(string name)
         {
             return Ok(_service.CreateUser(name));
