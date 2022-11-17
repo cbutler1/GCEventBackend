@@ -44,7 +44,7 @@ namespace Event.Api.Controllers
         //}
 
         // POST api/<CoursesController>
-        [HttpPost]
+        [HttpPost("name/{eventName}/price/{price}/location/{location}/date/{time}")]
         public ActionResult Post(string eventName, double price, string location, DateTime time)
         {
             return Ok(_service.CreateThingToDo(eventName, price, location, time));
