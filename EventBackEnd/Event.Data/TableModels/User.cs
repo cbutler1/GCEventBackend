@@ -11,6 +11,7 @@ namespace Event.Data.TableModels
 
         [Required]
         public string Name { get; set; }
+
         public string Password { get; set; } = "Password";
 
         public ICollection<Participation> Participations { get; set; }
