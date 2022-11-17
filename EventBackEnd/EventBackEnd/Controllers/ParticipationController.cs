@@ -69,6 +69,17 @@ namespace Event.Api.Controllers
             return Ok(enrollment);
         }
 
+        // delete participation where userid and thingToDoId match
+        [HttpDelete("user/{userId}/thingToDo/{thingToDoId}")]
+        public ActionResult Delete(int userId, int thingToDoId)
+        {
+            var enrollment = _service.DeleteParticipationUserIdThingToDoId(userId, thingToDoId);
+            Console.WriteLine(userId); 
+            Console.WriteLine(thingToDoId);
+            if(enrollment == null) return NotFound("There is no participation with an userID of " + userId + " and thingToDoId of " + thingToDoId);
+            return Ok(enrollment);
+        }
+
         // get number of attendees
         [HttpGet("attendees")]
         public ActionResult GetNumberOfAttendees(int eventId)

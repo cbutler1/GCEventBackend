@@ -11,6 +11,7 @@ namespace Event.Services.Services
         Participation? GetParticipationById(int id);
         ICollection<ThingToDo> GetParticipationsByUserId(int id);
         Participation DeleteParticipation(int id);
+        Participation DeleteParticipationUserIdThingToDoId(int thingToDoId, int userId);
         int GetNumberOfAttendees(int eventId);
     }
 
@@ -63,6 +64,17 @@ namespace Event.Services.Services
             _context.Participations.Remove(enrollment);
             _context.SaveChanges();
             return enrollment;
+        }
+
+        public Participation DeleteParticipationUserIdThingToDoId(int userId, int thingToDoId )
+        {
+            Participation participation = _context.Participations.SingleOrDefault(e => e.ThingToDoId == thingToDoId && e.UserId == userId);
+            if(participation == null)
+                return null;
+            Console.WriteLine(participation);
+            _context.Participations.Remove(participation);
+            _context.SaveChanges();
+            return participation;
         }
 
         int IParticipationService.GetNumberOfAttendees(int eventId)
